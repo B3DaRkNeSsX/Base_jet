@@ -58,12 +58,15 @@ int main()
         const int MaxJetHangar = 2;
         const int Hangar = 3;
         const int StatiJet = 3;
+        const int Missioni = 5;
 
         string jetHangar1[MaxJetHangar] = {"SU-27 Flanker", "F-35 Lightning II"};
         string jetHangar2[MaxJetHangar] = {"Eurofighter Typhoon", "F-22 Raptor"};
         string jetHangar3[MaxJetHangar] = {"F-16 Fighting Falcon", "MiG-29 Fulcrum"};
         string hangar[Hangar] = {"Hangar 1", "Hangar 2", "Hangar 3"};
         string statoJet[StatiJet] = {"In manutenzione", "In missione", "Pronto al decollo"};
+        string MissioniJet[Missioni] = {"Scorta aerea", "Ricognizione", "Supporto aereo alle truppe di terra", "Attacco aereo", "Evacuazione"};
+        string ZonaMissione[5] = {"Europa", "Russia", "Ucraina", "Cina ", "America"};
 
         int scelta;
         while (true)

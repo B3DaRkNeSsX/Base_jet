@@ -9,12 +9,45 @@ void setColor(int color)
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 
+void assegnaStatoJet(const string statoJet[], const int StatiJet)
+{
+    int SceltaAssegnazioneStato;
+    cout << "Vuoi assegnare uno stato al jet? (s/n) --> ";
+    char SceltaStatoJet;
+    cin >> SceltaStatoJet;
+    if (SceltaStatoJet == 's')
+    {
+        for (int i = 0; i < StatiJet; i++)
+        {
+            cout << i + 1 << ". " << statoJet[i] << "\n";
+        }
+        cout << "Inserisci il numero dello stato da assegnare al jet --> ";
+        cin >> SceltaAssegnazioneStato;
+        switch (SceltaAssegnazioneStato)
+        {
+        case 1:
+            cout << "Stato assegnato: In manutenzione" << "\n";
+            break;
+        case 2:
+            cout << "Stato assegnato: In missione" << "\n";
+            break;
+        case 3:
+            cout << "Stato assegnato: Pronto al decollo" << "\n";
+            break;
+        default:
+            cout << "Stato inesistente" << "\n";
+            Beep(1000, 500);
+            break;
+        }
+    }
+}
+
 int main()
 {
-    SetConsoleOutputCP(65001); // Imposta la console su UTF-8
+    SetConsoleOutputCP(65001); // Imposta la console su UTF-8, accenti e simboli funzionano correttamente
 
     setColor(2);
-    cout << "                                                 --||Benvenuto nel gestore del traffico aereo militare della PIECU/EMI Base||--";
+    cout << "                                                 --||Benvenuto nel gestore del traffico aereo militare della 'Pietro Military Base'||--";
     cout << "\n\n";
     cout << "-Per accedere al menù degli hangar premi 's', altrimenti premi 'n' per uscire dal programma.--> ";
     char Lettera_log_in;
@@ -24,23 +57,26 @@ int main()
     {
         const int MaxJetHangar = 2;
         const int Hangar = 3;
+        const int StatiJet = 3;
 
         string jetHangar1[MaxJetHangar] = {"SU-27 Flanker", "F-35 Lightning II"};
         string jetHangar2[MaxJetHangar] = {"Eurofighter Typhoon", "F-22 Raptor"};
         string jetHangar3[MaxJetHangar] = {"F-16 Fighting Falcon", "MiG-29 Fulcrum"};
         string hangar[Hangar] = {"Hangar 1", "Hangar 2", "Hangar 3"};
+        string statoJet[StatiJet] = {"In manutenzione", "In missione", "Pronto al decollo"};
 
         int scelta;
         while (true)
         {
             setColor(2);
-            cout << "Menu scelta hangar:" << "\n";
+            cout << "\n";
+            cout << "Menu scelta hangar:" << "\n\n";
             setColor(4);
             cout << "Hangar 1" << "\n";
             cout << "Hangar 2" << "\n";
             cout << "Hangar 3" << "\n";
             setColor(2);
-            cout << "La tua scelta --> \n";
+            cout << "\nLa tua scelta --> ";
             setColor(4);
             cin >> scelta;
             setColor(2);
@@ -72,6 +108,7 @@ int main()
                 }
                 break;
             default:
+                setColor(2);
                 cout << "Hangar inesistente" << "\n";
                 Beep(1000, 500);
                 continue;
@@ -80,8 +117,9 @@ int main()
             int sceltaInfJet;
             cout << "\nInserisci il numero del jet di cui vuoi leggere le informazioni ↓";
             cout << "\nla tua scelta-→ ";
+            setColor(4);
             cin >> sceltaInfJet;
-
+            setColor(6);
             switch (scelta)
             {
             case 1:
@@ -104,6 +142,10 @@ int main()
                          << " - Ottima autonomia\n"
                          << " - Base per varianti piu' avanzate (Su-30, Su-35)\n"
                          << "Curiosita': Creato per contrastare l’F-15 Eagle degli USA.\n";
+
+                    cout << "\n";
+                    setColor(2);
+                    assegnaStatoJet(statoJet, StatiJet);
                     break;
                 case 2:
                     cout << "\n";
@@ -128,8 +170,11 @@ int main()
                          << " - F-35B (versione STOVL, decollo corto e atterraggio verticale)\n"
                          << " - F-35C (versione per portaerei, ali ripiegabili)\n"
                          << "Curiosita': Considerato il caccia piu' avanzato al mondo, usato da diverse nazioni NATO.\n";
+                         setColor(2);
+                    assegnaStatoJet(statoJet, StatiJet);
                     break;
                 default:
+                setColor(2);
                     cout << "Jet inesistente" << "\n";
                     Beep(1000, 500);
                     break;
@@ -149,6 +194,8 @@ int main()
                          << "Armamento:\n"
                          << " - 1 cannone Mauser BK-27 da 27 mm\n"
                          << " - Missili aria-aria (AIM-120 AMRAAM, AIM-132 ASRAAM)\n";
+                         setColor(2);
+                    assegnaStatoJet(statoJet, StatiJet);
                     break;
                 case 2:
                     cout << "\n";
@@ -161,8 +208,11 @@ int main()
                          << "Armamento:\n"
                          << " - 1 cannone M61A2 Vulcan da 20 mm\n"
                          << " - Missili aria-aria (AIM-120 AMRAAM, AIM-9 Sidewinder)\n";
+                         setColor(2);
+                    assegnaStatoJet(statoJet, StatiJet);
                     break;
                 default:
+                setColor(2);
                     cout << "Jet inesistente" << "\n";
                     Beep(1000, 500);
                     break;
@@ -182,6 +232,7 @@ int main()
                          << "Armamento:\n"
                          << " - 1 cannone M61A1 Vulcan da 20 mm\n"
                          << " - Missili aria-aria (AIM-9 Sidewinder, AIM-120 AMRAAM)\n";
+                    assegnaStatoJet(statoJet, StatiJet);
                     break;
                 case 2:
                     cout << "\n";
@@ -194,24 +245,30 @@ int main()
                          << "Armamento:\n"
                          << " - 1 cannone GSh-30-1 da 30 mm\n"
                          << " - Missili aria-aria (R-60, R-73, R-77)\n";
+                         setColor(2);
+                    assegnaStatoJet(statoJet, StatiJet);
                     break;
                 default:
+                setColor(2);
                     cout << "Jet inesistente" << "\n";
                     Beep(1000, 500);
                     break;
                 }
                 break;
             default:
+            setColor(2);
                 cout << "Hangar inesistente" << "\n";
                 Beep(1000, 500);
                 break;
             }
 
             char continua;
+            setColor(2);
             cout << "\nVuoi continuare a usare il programma? (s/n) --> ";
             cin >> continua;
             if (continua != 's')
             {
+                setColor(2);
                 cout << "Arrivederci!" << "\n";
                 Beep(1000, 500);
                 break;
@@ -220,6 +277,7 @@ int main()
     }
     else
     {
+        setColor(2);
         cout << "Arrivederci!" << "\n";
         Beep(1000, 500);
     }

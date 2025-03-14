@@ -8,7 +8,19 @@ void setColor(int color)
 {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
-
+void assegnaMisioneJet(const string MissioniJet[], const int Missioni)
+{
+    char s_N = 's';
+    int SceltaAssegnazioneMissione;
+    cout << "Vuoi assegnare una missione al jet? (s/n) --> ";
+    cin >> s_N;
+    if (s_N == 's')
+    {
+        cout << "non ho fatto niente ancora"; /* qui è dove penso servano array dinamici,perchè l'utente deve scegliere appunto la missione
+        e decidere anche quando far terminare essa,e quindi modificare lo stato dell'aereo,ma come faccio a  farlo modifcare dall'utente durante l'esecuzione
+    del codice? */
+    }
+}
 void assegnaStatoJet(const string statoJet[], const int StatiJet)
 {
     int SceltaAssegnazioneStato;
@@ -44,7 +56,7 @@ void assegnaStatoJet(const string statoJet[], const int StatiJet)
 
 int main()
 {
-    SetConsoleOutputCP(65001); // Imposta la console su UTF-8, accenti e simboli funzionano correttamente
+    SetConsoleOutputCP(65001); // Imposta la console su UTF-8, accenti e simboli funzionano senza buggarsi
 
     setColor(2);
     cout << "                                                 --||Benvenuto nel gestore del traffico aereo militare della 'Pietro Military Base'||--";
@@ -90,7 +102,8 @@ int main()
                 cout << "\nVisualizzazione contenuto hangar 1..." << "\n";
                 for (int i = 0; i < MaxJetHangar; i++)
                 {
-                    cout << "\n" << jetHangar1[i];
+                    cout << "\n"
+                         << jetHangar1[i];
                     cout << "\n";
                 }
                 break;
@@ -98,7 +111,8 @@ int main()
                 cout << "Visualizzazione contenuto hangar 2..." << "\n";
                 for (int i = 0; i < MaxJetHangar; i++)
                 {
-                    cout << "\n" << jetHangar2[i];
+                    cout << "\n"
+                         << jetHangar2[i];
                     cout << "\n";
                 }
                 break;
@@ -106,7 +120,8 @@ int main()
                 cout << "Visualizzazione contenuto hangar 3..." << "\n";
                 for (int i = 0; i < MaxJetHangar; i++)
                 {
-                    cout << "\n" << jetHangar3[i];
+                    cout << "\n"
+                         << jetHangar3[i];
                     cout << "\n";
                 }
                 break;
@@ -173,11 +188,11 @@ int main()
                          << " - F-35B (versione STOVL, decollo corto e atterraggio verticale)\n"
                          << " - F-35C (versione per portaerei, ali ripiegabili)\n"
                          << "Curiosita': Considerato il caccia piu' avanzato al mondo, usato da diverse nazioni NATO.\n";
-                         setColor(2);
+                    setColor(2);
                     assegnaStatoJet(statoJet, StatiJet);
                     break;
                 default:
-                setColor(2);
+                    setColor(2);
                     cout << "Jet inesistente" << "\n";
                     Beep(1000, 500);
                     break;
@@ -197,7 +212,7 @@ int main()
                          << "Armamento:\n"
                          << " - 1 cannone Mauser BK-27 da 27 mm\n"
                          << " - Missili aria-aria (AIM-120 AMRAAM, AIM-132 ASRAAM)\n";
-                         setColor(2);
+                    setColor(2);
                     assegnaStatoJet(statoJet, StatiJet);
                     break;
                 case 2:
@@ -211,11 +226,11 @@ int main()
                          << "Armamento:\n"
                          << " - 1 cannone M61A2 Vulcan da 20 mm\n"
                          << " - Missili aria-aria (AIM-120 AMRAAM, AIM-9 Sidewinder)\n";
-                         setColor(2);
+                    setColor(2);
                     assegnaStatoJet(statoJet, StatiJet);
                     break;
                 default:
-                setColor(2);
+                    setColor(2);
                     cout << "Jet inesistente" << "\n";
                     Beep(1000, 500);
                     break;
@@ -248,18 +263,18 @@ int main()
                          << "Armamento:\n"
                          << " - 1 cannone GSh-30-1 da 30 mm\n"
                          << " - Missili aria-aria (R-60, R-73, R-77)\n";
-                         setColor(2);
+                    setColor(2);
                     assegnaStatoJet(statoJet, StatiJet);
                     break;
                 default:
-                setColor(2);
+                    setColor(2);
                     cout << "Jet inesistente" << "\n";
                     Beep(1000, 500);
                     break;
                 }
                 break;
             default:
-            setColor(2);
+                setColor(2);
                 cout << "Hangar inesistente" << "\n";
                 Beep(1000, 500);
                 break;

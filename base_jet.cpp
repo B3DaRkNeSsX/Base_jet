@@ -8,7 +8,7 @@ void setColor(int color)
 {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
-void assegnaMisioneJet(const string MissioniJet[], const int Missioni)
+void assegnaMissioneJet(const string MissioniJet[], const int Missioni)
 {
     char s_N = 's';
     int SceltaAssegnazioneMissione;
@@ -16,9 +16,35 @@ void assegnaMisioneJet(const string MissioniJet[], const int Missioni)
     cin >> s_N;
     if (s_N == 's')
     {
-        cout << "non ho fatto niente ancora"; /* qui è dove penso servano array dinamici,perchè l'utente deve scegliere appunto la missione
-        e decidere anche quando far terminare essa,e quindi modificare lo stato dell'aereo,ma come faccio a  farlo modifcare dall'utente durante l'esecuzione
-    del codice? */
+        for (int i = 0; i < Missioni; i++)
+        {
+            cout << "\n"
+                 << i + 1 << "." << MissioniJet[i] << "\n\n";
+        }
+        cout << "inserisci il numero della missione che vuoi assegnare al jet--> ";
+        cin >> SceltaAssegnazioneMissione;
+cout << "\n";
+        switch (SceltaAssegnazioneMissione)
+        {
+        case 1:
+            cout << "\nMissione Assegnata: Scorta aerea\n";
+            break;
+        case 2:
+            cout << "\nMissione Assegnata: Ricognizione\n";
+            break;
+        case 3:
+            cout << "\nMissione Assegnata: Supporto aereo alle truppe di terra\n";
+            break;
+        case 4:
+            cout << "\nMissione Assegnata: Attacco aereo\n";
+            break;
+        case 5:
+            cout << "\nMissione Assegnata: Evacuazione\n";
+            break;
+        default:
+            cout << "\n[!]-->Selezionare un numero valido.\n";
+            break;
+        }
     }
 }
 void assegnaStatoJet(const string statoJet[], const int StatiJet)
@@ -164,6 +190,7 @@ int main()
                     cout << "\n";
                     setColor(2);
                     assegnaStatoJet(statoJet, StatiJet);
+                    assegnaMissioneJet(MissioniJet, Missioni);
                     break;
                 case 2:
                     cout << "\n";
@@ -190,6 +217,7 @@ int main()
                          << "Curiosita': Considerato il caccia piu' avanzato al mondo, usato da diverse nazioni NATO.\n";
                     setColor(2);
                     assegnaStatoJet(statoJet, StatiJet);
+                    assegnaMissioneJet(MissioniJet, Missioni);
                     break;
                 default:
                     setColor(2);
@@ -214,6 +242,7 @@ int main()
                          << " - Missili aria-aria (AIM-120 AMRAAM, AIM-132 ASRAAM)\n";
                     setColor(2);
                     assegnaStatoJet(statoJet, StatiJet);
+                    assegnaMissioneJet(MissioniJet, Missioni);
                     break;
                 case 2:
                     cout << "\n";
@@ -228,6 +257,7 @@ int main()
                          << " - Missili aria-aria (AIM-120 AMRAAM, AIM-9 Sidewinder)\n";
                     setColor(2);
                     assegnaStatoJet(statoJet, StatiJet);
+                    assegnaMissioneJet(MissioniJet, Missioni);
                     break;
                 default:
                     setColor(2);
@@ -251,6 +281,7 @@ int main()
                          << " - 1 cannone M61A1 Vulcan da 20 mm\n"
                          << " - Missili aria-aria (AIM-9 Sidewinder, AIM-120 AMRAAM)\n";
                     assegnaStatoJet(statoJet, StatiJet);
+                    assegnaMissioneJet(MissioniJet, Missioni);
                     break;
                 case 2:
                     cout << "\n";
@@ -265,6 +296,7 @@ int main()
                          << " - Missili aria-aria (R-60, R-73, R-77)\n";
                     setColor(2);
                     assegnaStatoJet(statoJet, StatiJet);
+                    assegnaMissioneJet(MissioniJet, Missioni);
                     break;
                 default:
                     setColor(2);

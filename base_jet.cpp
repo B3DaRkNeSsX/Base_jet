@@ -8,11 +8,27 @@ void setColor(int color)
 {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
+void ContinuareONonContinuare()
+{
+    char continua;
+    setColor(2);
+    cout << "\nVuoi continuare a usare il programma? (s/n) --> ";
+    setColor(4);
+    cin >> continua;
+    if (continua != 's')
+    {
+        setColor(6);
+        cout << "Chiusura programma in corso..." << "\n";
+        Beep(1000, 500);
+        exit(0);
+    }
+}
 void assegnaMissioneJet(const string MissioniJet[], const int Missioni)
 {
     char s_N = 's';
     int SceltaAssegnazioneMissione;
-    cout << "Vuoi assegnare una missione al jet? (s/n) --> ";
+    setColor(2);
+    cout << "\nVuoi assegnare una missione al jet? (s/n) --> ";
     cin >> s_N;
     if (s_N == 's')
     {
@@ -21,30 +37,64 @@ void assegnaMissioneJet(const string MissioniJet[], const int Missioni)
             cout << "\n"
                  << i + 1 << "." << MissioniJet[i] << "\n\n";
         }
+        setColor(2);
         cout << "inserisci il numero della missione che vuoi assegnare al jet--> ";
+        setColor(4);
         cin >> SceltaAssegnazioneMissione;
-cout << "\n";
+        cout << "\n";
         switch (SceltaAssegnazioneMissione)
         {
+            setColor(4);
         case 1:
-            cout << "\nMissione Assegnata: Scorta aerea\n";
+            cout << "\n✔ Missione Assegnata: Scorta aerea\n";
             break;
         case 2:
-            cout << "\nMissione Assegnata: Ricognizione\n";
+            cout << "\n✔ Missione Assegnata: Ricognizione\n";
             break;
         case 3:
-            cout << "\nMissione Assegnata: Supporto aereo alle truppe di terra\n";
+            cout << "\n✔ Missione Assegnata: Supporto aereo alle truppe di terra\n";
             break;
         case 4:
-            cout << "\nMissione Assegnata: Attacco aereo\n";
+            cout << "\n✔ Missione Assegnata: Attacco aereo\n";
             break;
         case 5:
-            cout << "\nMissione Assegnata: Evacuazione\n";
+            cout << "\n✔ Missione Assegnata: Evacuazione\n";
             break;
         default:
             cout << "\n[!]-->Selezionare un numero valido.\n";
             break;
         }
+    }
+}
+void AssegnaZonaMissioneJet(const string ZonaMissione[], const int ZoneMissioni)
+{
+    int SceltaAssegnazioneZonaMissione;
+    for (int i = 0; i < ZoneMissioni; i++)
+    {
+        cout << i + 1 << ". " << ZonaMissione[i] << "\n";
+    }
+    cout << "|🔧|Assegnare zona missione--> ";
+    cin >> SceltaAssegnazioneZonaMissione;
+    switch (SceltaAssegnazioneZonaMissione)
+    {
+    case 1:
+        cout << "\n✔ Zona assegnata: Europa [35% risk rate]";
+        break;
+    case 2:
+        cout << "\n✔ Zona assegnata: Russia [90% risk rate]";
+        break;
+    case 3:
+        cout << "\n✔ Zona assegnata: Ucraina [75% risk rate]";
+        break;
+    case 4:
+        cout << "\n✔ Zona assegnata: Cina [65% risk rate]";
+        break;
+    case 5:
+        cout << "\n✔ Zona assegnata: America [15% risk rate]";
+        break;
+    default:
+        cout << "\n[!]-->Selezionare un numero valido.\n";
+        break;
     }
 }
 void assegnaStatoJet(const string statoJet[], const int StatiJet)
@@ -64,16 +114,16 @@ void assegnaStatoJet(const string statoJet[], const int StatiJet)
         switch (SceltaAssegnazioneStato)
         {
         case 1:
-            cout << "Stato assegnato: In manutenzione" << "\n";
+            cout << "✔ Stato assegnato: In manutenzione" << "\n";
             break;
         case 2:
-            cout << "Stato assegnato: In missione" << "\n";
+            cout << "✔ Stato assegnato: In missione" << "\n";
             break;
         case 3:
-            cout << "Stato assegnato: Pronto al decollo" << "\n";
+            cout << "✔ Stato assegnato: Pronto al decollo" << "\n";
             break;
         default:
-            cout << "Stato inesistente" << "\n";
+            cout << "❌ Stato inesistente" << "\n";
             Beep(1000, 500);
             break;
         }
@@ -85,9 +135,11 @@ int main()
     SetConsoleOutputCP(65001); // Imposta la console su UTF-8, accenti e simboli funzionano senza buggarsi
 
     setColor(2);
-    cout << "                                                 --||Benvenuto nel gestore del traffico aereo militare della 'Pietro Military Base'||--";
-    cout << "\n\n";
-    cout << "-Per accedere al menù degli hangar premi 's', altrimenti premi 'n' per uscire dal programma.--> ";
+    cout << "---------------------------------------------------------------\n";
+    cout << "           --|| Benvenuto nel gestore del traffico aereo militare ||--\n";
+    cout << "---------------------------------------------------------------\n";
+    cout << "\n";
+    cout << "🌐 Per accedere al menù degli hangar premi 's', altrimenti premi 'n' per uscire dal programma. --> ";
     char Lettera_log_in;
     cin >> Lettera_log_in;
 
@@ -97,14 +149,15 @@ int main()
         const int Hangar = 3;
         const int StatiJet = 3;
         const int Missioni = 5;
+        const int ZoneMissioni = 5;
 
         string jetHangar1[MaxJetHangar] = {"SU-27 Flanker", "F-35 Lightning II"};
         string jetHangar2[MaxJetHangar] = {"Eurofighter Typhoon", "F-22 Raptor"};
         string jetHangar3[MaxJetHangar] = {"F-16 Fighting Falcon", "MiG-29 Fulcrum"};
         string hangar[Hangar] = {"Hangar 1", "Hangar 2", "Hangar 3"};
-        string statoJet[StatiJet] = {"In manutenzione", "In missione", "Pronto al decollo"};
+        string statoJet[StatiJet] = {"In manutenzione🔧", "In missione", "Pronto al decollo"};
         string MissioniJet[Missioni] = {"Scorta aerea", "Ricognizione", "Supporto aereo alle truppe di terra", "Attacco aereo", "Evacuazione"};
-        string ZonaMissione[5] = {"Europa", "Russia", "Ucraina", "Cina ", "America"};
+        string ZonaMissione[ZoneMissioni] = {"Europa", "Russia", "Ucraina", "Cina ", "America"};
 
         int scelta;
         while (true)
@@ -113,9 +166,9 @@ int main()
             cout << "\n";
             cout << "Menu scelta hangar:" << "\n\n";
             setColor(4);
-            cout << "Hangar 1" << "\n";
-            cout << "Hangar 2" << "\n";
-            cout << "Hangar 3" << "\n";
+            cout << "Hangar [1]" << "\n";
+            cout << "Hangar [2]" << "\n";
+            cout << "Hangar [3]" << "\n";
             setColor(2);
             cout << "\nLa tua scelta --> ";
             setColor(4);
@@ -128,24 +181,29 @@ int main()
                 cout << "\nVisualizzazione contenuto hangar 1..." << "\n";
                 for (int i = 0; i < MaxJetHangar; i++)
                 {
+                    setColor(6);
                     cout << "\n"
                          << jetHangar1[i];
                     cout << "\n";
                 }
                 break;
             case 2:
+            setColor(2);
                 cout << "Visualizzazione contenuto hangar 2..." << "\n";
                 for (int i = 0; i < MaxJetHangar; i++)
                 {
+                    setColor(6);
                     cout << "\n"
                          << jetHangar2[i];
                     cout << "\n";
                 }
                 break;
             case 3:
+            setColor(2);
                 cout << "Visualizzazione contenuto hangar 3..." << "\n";
                 for (int i = 0; i < MaxJetHangar; i++)
                 {
+                    setColor(6);
                     cout << "\n"
                          << jetHangar3[i];
                     cout << "\n";
@@ -159,6 +217,7 @@ int main()
             }
 
             int sceltaInfJet;
+            setColor(2);
             cout << "\nInserisci il numero del jet di cui vuoi leggere le informazioni ↓";
             cout << "\nla tua scelta-→ ";
             setColor(4);
@@ -190,7 +249,10 @@ int main()
                     cout << "\n";
                     setColor(2);
                     assegnaStatoJet(statoJet, StatiJet);
+                    ContinuareONonContinuare();
                     assegnaMissioneJet(MissioniJet, Missioni);
+                    AssegnaZonaMissioneJet(ZonaMissione, ZoneMissioni);
+                    ContinuareONonContinuare();
                     break;
                 case 2:
                     cout << "\n";
@@ -217,11 +279,14 @@ int main()
                          << "Curiosita': Considerato il caccia piu' avanzato al mondo, usato da diverse nazioni NATO.\n";
                     setColor(2);
                     assegnaStatoJet(statoJet, StatiJet);
+                    ContinuareONonContinuare();
                     assegnaMissioneJet(MissioniJet, Missioni);
+                    AssegnaZonaMissioneJet(ZonaMissione, ZoneMissioni);
+                    ContinuareONonContinuare();
                     break;
                 default:
                     setColor(2);
-                    cout << "Jet inesistente" << "\n";
+                    cout << "❌" << "\n";
                     Beep(1000, 500);
                     break;
                 }
@@ -242,7 +307,10 @@ int main()
                          << " - Missili aria-aria (AIM-120 AMRAAM, AIM-132 ASRAAM)\n";
                     setColor(2);
                     assegnaStatoJet(statoJet, StatiJet);
+                    ContinuareONonContinuare();
                     assegnaMissioneJet(MissioniJet, Missioni);
+                    AssegnaZonaMissioneJet(ZonaMissione, ZoneMissioni);
+                    ContinuareONonContinuare();
                     break;
                 case 2:
                     cout << "\n";
@@ -257,11 +325,14 @@ int main()
                          << " - Missili aria-aria (AIM-120 AMRAAM, AIM-9 Sidewinder)\n";
                     setColor(2);
                     assegnaStatoJet(statoJet, StatiJet);
+                    ContinuareONonContinuare();
                     assegnaMissioneJet(MissioniJet, Missioni);
+                    AssegnaZonaMissioneJet(ZonaMissione, ZoneMissioni);
+                    ContinuareONonContinuare();
                     break;
                 default:
                     setColor(2);
-                    cout << "Jet inesistente" << "\n";
+                    cout << "❌" << "\n";
                     Beep(1000, 500);
                     break;
                 }
@@ -281,7 +352,10 @@ int main()
                          << " - 1 cannone M61A1 Vulcan da 20 mm\n"
                          << " - Missili aria-aria (AIM-9 Sidewinder, AIM-120 AMRAAM)\n";
                     assegnaStatoJet(statoJet, StatiJet);
+                    ContinuareONonContinuare();
                     assegnaMissioneJet(MissioniJet, Missioni);
+                    AssegnaZonaMissioneJet(ZonaMissione, ZoneMissioni);
+                    ContinuareONonContinuare();
                     break;
                 case 2:
                     cout << "\n";
@@ -296,11 +370,14 @@ int main()
                          << " - Missili aria-aria (R-60, R-73, R-77)\n";
                     setColor(2);
                     assegnaStatoJet(statoJet, StatiJet);
+                    ContinuareONonContinuare();
                     assegnaMissioneJet(MissioniJet, Missioni);
+                    AssegnaZonaMissioneJet(ZonaMissione, ZoneMissioni);
+                    ContinuareONonContinuare();
                     break;
                 default:
                     setColor(2);
-                    cout << "Jet inesistente" << "\n";
+                    cout << "❌" << "\n";
                     Beep(1000, 500);
                     break;
                 }
@@ -311,24 +388,12 @@ int main()
                 Beep(1000, 500);
                 break;
             }
-
-            char continua;
-            setColor(2);
-            cout << "\nVuoi continuare a usare il programma? (s/n) --> ";
-            cin >> continua;
-            if (continua != 's')
-            {
-                setColor(2);
-                cout << "Arrivederci!" << "\n";
-                Beep(1000, 500);
-                break;
-            }
         }
     }
     else
     {
-        setColor(2);
-        cout << "Arrivederci!" << "\n";
+        setColor(6);
+        cout << "Chiusura programma in corso..." << "\n";
         Beep(1000, 500);
     }
 
